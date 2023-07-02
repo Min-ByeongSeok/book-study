@@ -1,0 +1,19 @@
+[2023-07-02 14:16:45.064] [INFO ] [main] com.springboot.api.ApiApplication Starting ApiApplication using Java 11.0.19 on DESKTOP-MS4ORR3 with PID 5600 (C:\Users\Home\Desktop\Git\Spring boot Guide\api\target\classes started by Home in C:\Users\Home\Desktop\Git\Spring boot Guide\api)
+[2023-07-02 14:16:45.070] [INFO ] [main] com.springboot.api.ApiApplication No active profile set, falling back to default profiles: default
+[2023-07-02 14:16:45.880] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8080 (http)
+[2023-07-02 14:16:45.889] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8080"]
+[2023-07-02 14:16:45.889] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2023-07-02 14:16:45.889] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.54]
+[2023-07-02 14:16:45.958] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2023-07-02 14:16:45.959] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 850 ms
+[2023-07-02 14:16:46.238] [INFO ] [main] springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+[2023-07-02 14:16:46.398] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Starting ProtocolHandler ["http-nio-8080"]
+[2023-07-02 14:16:46.412] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat started on port(s): 8080 (http) with context path ''
+[2023-07-02 14:16:46.413] [INFO ] [main] springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper Context refreshed
+[2023-07-02 14:16:46.426] [INFO ] [main] springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper Found 1 custom documentation plugin(s)
+[2023-07-02 14:16:46.449] [INFO ] [main] springfox.documentation.spring.web.scanners.ApiListingReferenceScanner Scanning for api listing references
+[2023-07-02 14:16:46.566] [INFO ] [main] springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator Generating unique operation named: postMemberUsingPOST_1
+[2023-07-02 14:16:46.593] [INFO ] [main] com.springboot.api.ApiApplication Started ApiApplication in 1.997 seconds (JVM running for 3.061)
+[2023-07-02 14:19:03.729] [INFO ] [http-nio-8080-exec-2] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2023-07-02 14:19:03.730] [INFO ] [http-nio-8080-exec-2] org.springframework.web.servlet.DispatcherServlet Initializing Servlet 'dispatcherServlet'
+[2023-07-02 14:19:03.731] [INFO ] [http-nio-8080-exec-2] org.springframework.web.servlet.DispatcherServlet Completed initialization in 1 ms

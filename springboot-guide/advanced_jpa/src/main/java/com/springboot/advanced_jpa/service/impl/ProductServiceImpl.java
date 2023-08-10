@@ -1,72 +1,79 @@
 package com.springboot.advanced_jpa.service.impl;
 
-import com.springboot.advanced_jpa.data.dao.ProductDAO;
 import com.springboot.advanced_jpa.data.dto.ProductDto;
 import com.springboot.advanced_jpa.data.dto.ProductResponseDto;
 import com.springboot.advanced_jpa.data.entity.Product;
+import com.springboot.advanced_jpa.data.repository.ProductRepository;
 import com.springboot.advanced_jpa.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductDAO productDAO;
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductDAO productDAO) {
-        this.productDAO = productDAO;
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
     public ProductResponseDto getProduct(Long number) {
-        Product product = productDAO.selectProduct(number);
+        LOGGER.info("[getProduct] input number : {}", number);
+        Product product = productRepository.findById(number).get();
 
-        return ProductResponseDto.builder()
-                .number(product.getNumber())
-                .name(product.getName())
-                .price(product.getPrice())
-                .stock(product.getStock())
-                .build();
+        LOGGER.info("[getProduct] product number : {}, name : {}", product.getNumber(),
+                product.getName());
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setNumber(product.getNumber());
+        productResponseDto.setName(product.getName());
+        productResponseDto.setPrice(product.getPrice());
+        productResponseDto.setStock(product.getStock());
+
+        return productResponseDto;
     }
 
     @Override
     public ProductResponseDto saveProduct(ProductDto productDto) {
+        LOGGER.info("[saveProduct] productDTO : {}", productDto.toString());
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
 
-        Product product = Product.builder()
-                .name(productDto.getName())
-                .price(productDto.getPrice())
-                .stock(productDto.getStock())
-                .createAt(LocalDateTime.now())
-                .updateAt(LocalDateTime.now())
-                .build();
+        Product savedProduct = productRepository.save(product);
+        LOGGER.info("[saveProduct] savedProduct : {}", savedProduct);
 
-        Product saveProduct = productDAO.insertProduct(product);
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setNumber(savedProduct.getNumber());
+        productResponseDto.setName(savedProduct.getName());
+        productResponseDto.setPrice(savedProduct.getPrice());
+        productResponseDto.setStock(savedProduct.getStock());
 
-        return ProductResponseDto.builder()
-                .number(saveProduct.getNumber())
-                .name(saveProduct.getName())
-                .stock(saveProduct.getStock())
-                .price(saveProduct.getPrice())
-                .build();
+        return productResponseDto;
     }
 
     @Override
-    public ProductResponseDto changeProductName(Long number, String name) throws Exception {
-        Product changedProduct = productDAO.updateProductName(number, name);
+    public ProductResponseDto changeProductName(Long number, String name) {
+        Product foundProduct = productRepository.findById(number).get();
+        foundProduct.setName(name);
+        Product changedProduct = productRepository.save(foundProduct);
 
-        return ProductResponseDto.builder()
-                .name(changedProduct.getName())
-                .number(changedProduct.getNumber())
-                .price(changedProduct.getPrice())
-                .stock(changedProduct.getStock())
-                .build();
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setNumber(changedProduct.getNumber());
+        productResponseDto.setName(changedProduct.getName());
+        productResponseDto.setPrice(changedProduct.getPrice());
+        productResponseDto.setStock(changedProduct.getStock());
+
+        return productResponseDto;
     }
 
     @Override
-    public void deleteProduct(Long number) throws Exception {
-        productDAO.deleteProduct(number);
+    public void deleteProduct(Long number) {
+        productRepository.deleteById(number);
     }
 }

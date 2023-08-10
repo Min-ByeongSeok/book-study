@@ -3,16 +3,16 @@ package com.springboot.advanced_jpa.data.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
+// 예제 8.43
 @Entity
-@Table(name = "product")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
-public class Product {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "product")
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,4 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
 }
